@@ -1,0 +1,25 @@
+html, body {
+    overflow: hidden;
+    height: 100%;
+}
+body {
+    color: #455F64;
+    background-color: #58BAE8;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    align-items: center;
+    width: 100vw;
+}
+
+.search, .info {
+    display: flex;
+    justify-content: center;
+}
+
+.search {
+    gap: 1vh
+}
+
+
+
