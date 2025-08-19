@@ -7,7 +7,7 @@ html, body {
     margin: 0;
 }
 body {
-    color: #455F64;
+    color: #8fc2ce;
     background-color: #58BAE8;
     display: grid;
     grid-template-rows: 1fr 4fr 3fr;
@@ -32,7 +32,7 @@ body {
 .header_icon {
     width: 8vh;
     height: 8vh;
-    background-color: red;
+
 }
 
 input{
