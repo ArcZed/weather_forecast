@@ -1,61 +1,43 @@
-let APIKey = "Z264L688M27C4KGK7AFYHF9LG";
+let key = "Z264L688M27C4KGK7AFYHF9LG";//please don't mess with it D:
+import {WeekData, DayData} from "./format.js"
+
 //fetch data from visualcrossing
 async function getData (location, key) {
     let response;
     let data;
-    try {
-        data = await fetch(
-        `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/
-        ${location}/tomorrow?unitGroup=metric&key=${key}&contentType=json`)
-        response = await data.json();
-    }
-    catch (error){   
-        console.log(error,"run");
-        response = error
-        throw error
-    }
-    
 
-    
+    data = await fetch(
+    `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/
+    ${location}/next7days?unitGroup=metric&key=${key}&contentType=json`);
+    response = await data.json();
+
     return response;
    
 }
-//process data for necessary info
-function getInfo (data) {
-    console.log(data)
-    let address = data.resolvedAddress;
-    let timezone = data.timezone;
-    
-    let condition = data.days[0].conditions;
-    let date = data.days[0].datetime;
-    let descr = data.days[0].description;
-    let cloud = data.days[0].cloudcover;
-    let hours = data.days[0].hours;
-    let icon = data.days[0].icon;
-    let temp = data.days[0].temp;
-    return {timezone,address,condition,date,descr,cloud,hours,icon,temp}
-}
-
 //get input from user and create data obj for use
-export async function getInput (location) {
-
+export async function getInput (location, index) {
     let data;
+
     
     try{
         //get input and fetch data from input
-        // ${locationInput}
-        data = await getData(`${location}`,APIKey);
-        
+        data = await getData(`${location}`,key);
     }
     catch(error){
         console.log(error)
         return error
     }
-        
         //process the data
-        let weatherData 
-        weatherData = getInfo(data);
-        
-      
-        return weatherData
+        let weatherData =  new WeekData(data);
+        let daysData = []
+        weatherData.days.forEach((day,index) => {
+            daysData.push(new DayData(weatherData.days[index])) 
+            
+        })
+        let dayData = daysData[0]
+        console.log(dayData)
+
+        // console.log(dayData.img = dayData.icon)
+
+        return {weatherData, daysData, dayData}
 }

@@ -1,25 +1,159 @@
+:root {
+    --searchbar-height: 6vh;
+}
+
 html, body {
     overflow: hidden;
     height: 100%;
+    margin: 0;
 }
 body {
     color: #455F64;
     background-color: #58BAE8;
     display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 1fr 4fr 3fr;
     align-items: center;
     width: 100vw;
 }
 
-.search, .info {
+.header {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    place-items: center;
+}
+
+.searchbar {
+    display: grid;
+    grid-template-columns: 9fr 1fr;
+    height: var(--searchbar-height);
+    width: 100%;
+}
+
+.header_icon {
+    width: 8vh;
+    height: 8vh;
+    background-color: red;
+}
+
+input{
+    all: unset;
+    border: solid 2px white ;
+}
+
+button {
+    all: unset;
+    background-color: #455F64;
+    width: var(--searchbar-height);
+}
+
+.time {
     display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.5vh;
+}
+.t{
+    width: 100%;
+    text-align: center;
+    font-size: 1.5rem;
+}
+.line{
+    border: 1px solid white;
+    width: 100%;
+}
+.timezone {
+    text-align: center;
+}
+.info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    place-items: center;
+}
+.baseInfo {
+    width: 95%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+    font-size: 1.8rem;
+    height: 100%;
+}
+
+.info_i {
+    width: 25vh;
+    height: 25vh;
+    background-color: antiquewhite;
+}
+
+.xtrInfo {
+    display: grid;
+    grid-template-rows: 1fr 5fr;
+    font-size: 1.4rem;
+    place-items: center;
+    width: 80%;
+}
+
+.card-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 5vh;
+    place-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.card{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 15vh;
+    width: 13vh;
+    background-color: aliceblue;
+}
+
+.footer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
 }
 
-.search {
-    gap: 1vh
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 60%;
+    gap: 3vh;
 }
-
-
-
+.wDesc {
+    align-self: flex-start;
+    font-size: 1.5rem;
+}
+.week-wrapper {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    gap: 0;
+    place-items: center;
+    justify-self: center;
+}
+.weekCard {
+    width: 100%;
+    height: 15vh;
+    background-color: aliceblue;
+    border: 1px solid black;
+}
+.tm {
+    width: 100%;
+    height: 8vh;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
