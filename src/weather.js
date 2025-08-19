@@ -15,13 +15,14 @@ async function getData (location, key) {
    
 }
 //get input from user and create data obj for use
-export async function getInput (location, index) {
+export async function getInput (location) {
     let data;
 
     
     try{
         //get input and fetch data from input
         data = await getData(`${location}`,key);
+        console.log(data)
     }
     catch(error){
         console.log(error)

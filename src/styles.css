@@ -3,7 +3,6 @@
 }
 
 html, body {
-    overflow: hidden;
     height: 100%;
     margin: 0;
 }
@@ -73,19 +72,29 @@ button {
 }
 .baseInfo {
     width: 95%;
+    font-size: 1.6rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.currDay {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
     flex-direction: column;
-    font-size: 1.8rem;
-    height: 100%;
+    text-align: start;
+    gap: 2vh;
+    height: 40vh;
+    width: 70%;
+    background: linear-gradient(rgba(11, 11, 34, 0.103) 75%, rgb(199, 198, 209));
 }
 
 .info_i {
     width: 25vh;
-    height: 25vh;
-    background-color: antiquewhite;
 }
+
 
 .xtrInfo {
     display: grid;
@@ -110,8 +119,8 @@ button {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    height: 15vh;
-    width: 13vh;
+    height: 18vh;
+    width: 15vh;
     background-color: aliceblue;
 }
 
@@ -147,6 +156,14 @@ button {
     height: 15vh;
     background-color: aliceblue;
     border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: 1.4rem;
+}
+.weekCard img {
+    width: 60%;
 }
 .tm {
     width: 100%;

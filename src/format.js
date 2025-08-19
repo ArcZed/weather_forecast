@@ -19,13 +19,13 @@ class DayData {
         this.humidity = `${data.humidity}%`;
         this.snow = `${data.snow} cm`;
         this.temp = `${data.temp}°C`;
-        this.wind = `${data.windspeed} k/m`;
+        this.wind = `${data.windspeed} km/h`;
 
         this.icon = data.icon
     }
 
     get img() {
-        return import(`./weatherPNG/${this.icon}.png`)
+        return import(`./weatherSVG/${this.icon}.svg`)
         .then((response) => {
             console.log(response.default)
             return response.default;

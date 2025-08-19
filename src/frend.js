@@ -25,7 +25,7 @@ function populateInput(data) {
 
         let icon = document.createElement("img")
             infoIcon.appendChild(icon);
-            day.img.then((src)=> {
+            dayData.img.then((src)=> {
                 icon.setAttribute("src", src);
         })
         let dayDisplayProp = 
@@ -71,13 +71,19 @@ function populateInput(data) {
             let card = document.createElement("div");
             wWrapper.appendChild(card);
             card.classList.add("weekCard");
-            console.log(day)
             card.textContent = day.date
             
             let icon = document.createElement("img");
             card.appendChild(icon)
             day.img.then((src) => {
                 icon.setAttribute("src", src);
+            })
+
+            card.addEventListener("click", (e) => {
+                infoIcon.innerHTML = ""
+                dayWrapper.innerHTML = "";
+                dayDesc.textContent = day.desc;
+                generateDayCard(day);
             })
         })
 
@@ -108,6 +114,7 @@ export function handleInput () {
 
     let input = document.querySelector("input");
     let submitBtn = document.querySelector(".submit");
+    let body = document.querySelector("body")
 
     let locationInput
     let data
@@ -148,6 +155,18 @@ export function handleInput () {
     }
     setInterval(updateTime, 1000); // Calls updateClock every second
 
+    //set background
+    let bg = ["dawn", "noon", "sunset", "night"];
+    
+    bg.forEach((time) => {
+        import(`./background/${time}.png`).then((response) => {
+            console.log(response.default)
+            body.style.backgroundImage = `url(${response.default})`
+        })
+    })
+    
+
+    //handle input
     input.addEventListener("keyup", () => {
         locationInput = `${input.value}`;
         console.log(locationInput);
