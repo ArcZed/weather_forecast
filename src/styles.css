@@ -6,13 +6,23 @@ html, body {
     height: 100%;
     margin: 0;
 }
+
+@font-face {
+    font-family: Garamond;
+    src: url(./EB_Garamond/EBGaramond-VariableFont_wght.ttf);
+}
+
 body {
-    color: #8fc2ce;
-    background-color: #58BAE8;
+    font-family: Garamond,sans-serif;
+    color: #282C26;
+    background-image: url(./background/noon.jpg);
     display: grid;
     grid-template-rows: 1fr 4fr 3fr;
     align-items: center;
-    width: 100vw;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: cover;
 }
 
 .header {
@@ -38,6 +48,8 @@ body {
 input{
     all: unset;
     border: solid 2px white ;
+    font-size:1.5rem;
+    padding-left: 10px;
 }
 
 button {
@@ -52,8 +64,10 @@ button {
     justify-content: center;
     flex-direction: column;
     gap: 0.5vh;
+    
 }
 .t{
+    font-weight: bold;
     width: 100%;
     text-align: center;
     font-size: 1.5rem;
@@ -66,10 +80,24 @@ button {
     text-align: center;
 }
 .info {
+    color: #E3D8D4;
     display: grid;
     grid-template-columns: 1fr 1fr;
     place-items: center;
 }
+
+.location_info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1vh;
+}
+
+.locIcon {
+    content: url(./svgs/location.svg);
+    width: 10%;
+}
+
 .baseInfo {
     width: 95%;
     font-size: 1.6rem;
@@ -87,8 +115,9 @@ button {
     text-align: start;
     gap: 2vh;
     height: 40vh;
-    width: 70%;
-    background: linear-gradient(rgba(11, 11, 34, 0.103) 75%, rgb(199, 198, 209));
+    width: 50%;
+    z-index: 4;
+    backdrop-filter: blur(10px);
 }
 
 .info_i {
@@ -99,19 +128,20 @@ button {
 .xtrInfo {
     display: grid;
     grid-template-rows: 1fr 5fr;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     place-items: center;
     width: 80%;
+   
 }
 
 .card-wrapper {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 5vh;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     place-items: center;
     width: 100%;
     height: 100%;
+
+    backdrop-filter: blur(10px);
 }
 
 .card{
@@ -120,8 +150,9 @@ button {
     justify-content: center;
     flex-direction: column;
     height: 18vh;
-    width: 15vh;
-    background-color: aliceblue;
+    width: 16vh;
+    gap: 2vh;
+    backdrop-filter: blur(5px);
 }
 
 .footer{
@@ -129,21 +160,37 @@ button {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    color: #E3D8D4;
 }
 
 .nav {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    width: 60%;
-    gap: 3vh;
+    display: grid;
+
+    width: 80%;    
+    height: 100%;
 }
 .wDesc {
     align-self: flex-start;
     font-size: 1.5rem;
+    color: #E3D8D4;
 }
+
+.wIndicator {
+    position: relative;
+    border-bottom: 5px solid grey;
+    margin-bottom: 2vh;
+    border-radius: 10px;
+}
+
+.pointer {
+    content: url(./svgs/pointer.svg);
+    height: 2vh;
+    position: absolute;
+    transition: ease 0.8s;
+}
+
 .week-wrapper {
+    color: #E3D8D4;
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
@@ -153,17 +200,16 @@ button {
 }
 .weekCard {
     width: 100%;
-    height: 15vh;
-    background-color: aliceblue;
-    border: 1px solid black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    height: 20vh;
+    
+    display: grid;
+    grid-template-rows: 1fr 2fr;
+    place-items: center;
     font-size: 1.4rem;
+    backdrop-filter: blur(5px);
 }
 .weekCard img {
-    width: 60%;
+    width: 50%;
 }
 .tm {
     width: 100%;
@@ -173,4 +219,8 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.weekCard,button:hover {
+    cursor: pointer;
 }

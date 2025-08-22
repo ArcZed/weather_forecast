@@ -1,6 +1,7 @@
 import { getInput } from "./weather";
 
 
+
 let isError = false;
 
 function populateInput(data) {
@@ -16,8 +17,10 @@ function populateInput(data) {
     let dayWrapper = document.querySelector(".card-wrapper");
     let dayDesc = document.querySelector(".dayDesc");
 
+    let nav = document.querySelector(".nav")
     let wDesc = document.querySelector(".wDesc");
     let wWrapper = document.querySelector(".week-wrapper");
+    let indicator = document.querySelector(".bar");
     console.log(data)
 
     //generate info for the day
@@ -29,8 +32,7 @@ function populateInput(data) {
                 icon.setAttribute("src", src);
         })
         let dayDisplayProp = 
-        [   "temp"    ,   "humidity", 
-            "wind"    ,   "snow"    ]
+        [   "temp","humidity","wind","snow"    ]
 
         for (let i = 0; i < dayDisplayProp.length; i++){
 
@@ -67,8 +69,29 @@ function populateInput(data) {
     }
 
     const  generateWeekNav = () => {
-        days.forEach((day) => {
-            let card = document.createElement("div");
+        let card
+
+        let pointer = document.createElement("div");
+
+        indicator.appendChild(pointer)
+
+        indicator.classList.add("wIndicator");
+        pointer.classList.add("pointer");
+
+        const formatStr = (str) => {
+            let forStr 
+            
+            let firstLet = str.split("-")[0].split("")[0].toUpperCase();
+            console.log(firstLet)
+            console.log(str.split("-")[0].split("").splice(0, 1, firstLet))
+
+            forStr = str.split("-")[0].split("").splice(0, 1, firstLet)
+            
+            console.log(forStr)
+        }
+
+        days.forEach((day, index) => {
+            card = document.createElement("div");
             wWrapper.appendChild(card);
             card.classList.add("weekCard");
             card.textContent = day.date
@@ -79,20 +102,50 @@ function populateInput(data) {
                 icon.setAttribute("src", src);
             })
 
+            let desc = document.createElement("div");
+            desc.classList.add("wcDesc");
+            card.appendChild(desc);
+
+            console.log(formatStr(day.icon));
+
             card.addEventListener("click", (e) => {
                 infoIcon.innerHTML = ""
                 dayWrapper.innerHTML = "";
                 dayDesc.textContent = day.desc;
+                date.textContent = day.date
                 generateDayCard(day);
+                movePointer(index)
             })
+            
+
+            
         })
 
+        
+
+        const movePointer = (index) => {
+            let cardWidth = window.getComputedStyle(card).width;
+            pointer.style.width = cardWidth;
+            pointer.style.marginLeft = `${parseFloat(cardWidth)*index}px`;
+        }
+
+        movePointer()
     }
 
+    //icons touch ups
+    
     //populate
     if (!isError){
         //generate base info
-        location.textContent = week.address;
+        let locInfo = document.createElement("div");
+        let locIcon = document.createElement("div")
+
+        location.appendChild(locIcon)
+        location.appendChild(locInfo);
+
+        locIcon.classList.add("locIcon");
+        locInfo.textContent = week.address;
+        
         date.textContent = day.date
         //generate cards
         infoIcon.innerHTML = ""
@@ -100,6 +153,7 @@ function populateInput(data) {
         dayDesc.textContent = day.desc;
         generateDayCard(day);
         //gen week nav
+        indicator.innerHTML = "";
         wWrapper.innerHTML = "";
         wDesc.textContent = week.weekDesc;
         generateWeekNav();
@@ -114,14 +168,13 @@ export function handleInput () {
 
     let input = document.querySelector("input");
     let submitBtn = document.querySelector(".submit");
-    let body = document.querySelector("body")
 
     let locationInput
     let data
 
     let defaultIndex = 0;
 
-    //create clock 
+    //create clock (ai code cause im lazy)
     function getTimezoneWithAbbreviation(date) {
         const fullTimezone = new Intl.DateTimeFormat('en-US', { timeZoneName: 'long' })
           .formatToParts(date)
@@ -155,22 +208,9 @@ export function handleInput () {
     }
     setInterval(updateTime, 1000); // Calls updateClock every second
 
-    //set background
-    let bg = ["dawn", "noon", "sunset", "night"];
-    
-    bg.forEach((time) => {
-        import(`./background/${time}.png`).then((response) => {
-            console.log(response.default)
-            body.style.backgroundImage = `url(${response.default})`
-        })
-    })
-    
-  
-
     //handle input
     input.addEventListener("keyup", () => {
         locationInput = `${input.value}`;
-        console.log(locationInput);
     });
 
     window.addEventListener("keypress",async (event) =>{

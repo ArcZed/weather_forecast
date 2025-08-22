@@ -27,7 +27,6 @@ class DayData {
     get img() {
         return import(`./weatherSVG/${this.icon}.svg`)
         .then((response) => {
-            console.log(response.default)
             return response.default;
         })
     }
