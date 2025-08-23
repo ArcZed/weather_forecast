@@ -8,12 +8,12 @@ html, body {
 }
 
 @font-face {
-    font-family: Garamond;
-    src: url(./EB_Garamond/EBGaramond-VariableFont_wght.ttf);
+    font-family: "Helvetica";
+    src: url(./helvetica-255-webfont/Helvetica.woff);
 }
 
 body {
-    font-family: Garamond,sans-serif;
+    font-family: Helvetica,sans-serif;
     color: #282C26;
     background-image: url(./background/noon.jpg);
     display: grid;
@@ -42,7 +42,6 @@ body {
 .header_icon {
     width: 8vh;
     height: 8vh;
-
 }
 
 input{
@@ -52,10 +51,17 @@ input{
     padding-left: 10px;
 }
 
-button {
-    all: unset;
-    background-color: #455F64;
-    width: var(--searchbar-height);
+.submit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #282C26;
+    width: 6vh;
+    height: 6vh;
+}
+
+.submit::before {
+    content: url(./svgs/search.svg);
 }
 
 .time {
@@ -64,7 +70,7 @@ button {
     justify-content: center;
     flex-direction: column;
     gap: 0.5vh;
-    
+    color: #282C26;
 }
 .t{
     font-weight: bold;
@@ -86,18 +92,6 @@ button {
     place-items: center;
 }
 
-.location_info {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1vh;
-}
-
-.locIcon {
-    content: url(./svgs/location.svg);
-    width: 10%;
-}
-
 .baseInfo {
     width: 95%;
     font-size: 1.6rem;
@@ -108,20 +102,66 @@ button {
 }
 
 .currDay {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 2fr 1fr;
     text-align: start;
     gap: 2vh;
     height: 40vh;
     width: 50%;
     z-index: 4;
     backdrop-filter: blur(10px);
+    place-items: center;
+    visibility:hidden;
+}
+
+.location_info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1vh;
+    grid-area: 1 / 1  / 1 / 3;
+}
+
+.locIcon {
+    content: url(./svgs/location.svg);
+    width: 10%;
 }
 
 .info_i {
-    width: 25vh;
+    width: 80%;
+    grid-area: 2 / 1  / 3 / 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 1.4rem;
+    gap: 1vh;
+}
+
+.sun {
+    margin-top: 1vh;
+    font-size: 1.2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 1vh;
+}
+
+.temp{
+    color: #9ABBD6;
+    font-weight: bold;
+    font-size: 4rem;
+}
+
+.temp div {
+    color: #E3D8D4;
+    font-size: 1.2rem;
+    font-weight: 300;
+}
+
+.date {
+    grid-area: 3 / 1  / 4 / 3;
 }
 
 
@@ -130,7 +170,7 @@ button {
     grid-template-rows: 1fr 5fr;
     font-size: 1.6rem;
     place-items: center;
-    width: 80%;
+    width: 90%;
    
 }
 
@@ -149,8 +189,8 @@ button {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    height: 18vh;
-    width: 16vh;
+    height: 25vh;
+    width: 100%;
     gap: 2vh;
     backdrop-filter: blur(5px);
 }
@@ -203,11 +243,16 @@ button {
     height: 20vh;
     
     display: grid;
-    grid-template-rows: 1fr 2fr;
+    grid-template-rows: 1fr 2fr 1fr;
     place-items: center;
     font-size: 1.4rem;
     backdrop-filter: blur(5px);
 }
+
+.wcDesc {
+    font-size: 1rem;
+}
+
 .weekCard img {
     width: 50%;
 }
@@ -219,8 +264,28 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
+    color: azure;
 }
 
-.weekCard,button:hover {
+.submit:hover {
+    cursor: pointer;
+}
+
+.card:hover {
+    box-shadow: 0 0 10px 0 #7DA0BD inset;
+}
+
+.weekCard:hover {
+    cursor: pointer;
+    box-shadow: 0 0 10px 0 #7DA0BD inset;
+    transition:  box-shadow 0.2s ease;
+}
+
+a {
+    all: unset;
+    margin-left: 5px;
+    color: #E3D8D4;
+}
+a:hover {
     cursor: pointer;
 }

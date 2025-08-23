@@ -1,6 +1,18 @@
 import { getInput } from "./weather";
 
+const formatStr = (str) => {
+            
 
+    let strArr = str.split("-")[0].split("");
+    //capitalize first letter
+    let firstLet = str.split("-")[0].split("")[0].toUpperCase();
+    strArr.splice(0,1, firstLet);
+    //replace first word
+    let forStr = str.split("-")
+    forStr.splice(0, 1, strArr.join(""));
+
+    return forStr.join(" ")
+}
 
 let isError = false;
 
@@ -16,6 +28,7 @@ function populateInput(data) {
 
     let dayWrapper = document.querySelector(".card-wrapper");
     let dayDesc = document.querySelector(".dayDesc");
+    let curDay = document.querySelector(".currDay");
 
     let nav = document.querySelector(".nav")
     let wDesc = document.querySelector(".wDesc");
@@ -26,13 +39,42 @@ function populateInput(data) {
     //generate info for the day
     const generateDayCard = (dayData) => {
 
-        let icon = document.createElement("img")
-            infoIcon.appendChild(icon);
-            dayData.img.then((src)=> {
+        let icon = document.createElement("img");
+        let sun = document.createElement("div");
+        let temp = document.querySelector(".temp");
+        let feelLike = document.createElement("div");
+
+        infoIcon.appendChild(icon);
+        dayData.img.then((src)=> {
                 icon.setAttribute("src", src);
         })
+
+        sun.classList.add("sun")
+        infoIcon.appendChild(sun);
+        let sunrise = document.createElement("div");
+        let sunset = document.createElement("div");
+        let rise = document.createElement("div");
+        let set = document.createElement("div");
+
+        sun.appendChild(sunrise);
+        sun.appendChild(rise);
+        sun.appendChild(sunset);
+        sun.appendChild(set);
+        
+        sunrise.textContent = `Sunrise:`;
+        sunset.textContent = `Sunset: `;
+        rise.textContent =  `${dayData.sunrise}`
+        set.textContent = `${dayData.sunset}`
+
+        temp.textContent = dayData.temp;
+        temp.appendChild(feelLike);
+
+        date.textContent = new Date(dayData.datetime).toLocaleDateString("en-UK", {weekday: "long", day: "numeric", month: "long"});
+
+        feelLike.textContent = `Feels like: ${dayData.feelLike}`;
+
         let dayDisplayProp = 
-        [   "temp","humidity","wind","snow"    ]
+        [   "cloud","humidity","wind","snow"    ]
 
         for (let i = 0; i < dayDisplayProp.length; i++){
 
@@ -42,9 +84,9 @@ function populateInput(data) {
             dayWrapper.appendChild(card);
             card.classList.add("card");
             switch (dayDisplayProp[i]) {
-                case "temp":
-                    card.textContent = "Temperature";
-                    stat.textContent = dayData.temp;
+                case "cloud":
+                    card.textContent = "Cloud cover";
+                    stat.textContent = dayData.cloud;
                     card.appendChild(stat);
                     continue;
                 case "humidity":
@@ -69,6 +111,7 @@ function populateInput(data) {
     }
 
     const  generateWeekNav = () => {
+
         let card
 
         let pointer = document.createElement("div");
@@ -78,17 +121,7 @@ function populateInput(data) {
         indicator.classList.add("wIndicator");
         pointer.classList.add("pointer");
 
-        const formatStr = (str) => {
-            let forStr 
-            
-            let firstLet = str.split("-")[0].split("")[0].toUpperCase();
-            console.log(firstLet)
-            console.log(str.split("-")[0].split("").splice(0, 1, firstLet))
-
-            forStr = str.split("-")[0].split("").splice(0, 1, firstLet)
-            
-            console.log(forStr)
-        }
+        
 
         days.forEach((day, index) => {
             card = document.createElement("div");
@@ -105,23 +138,18 @@ function populateInput(data) {
             let desc = document.createElement("div");
             desc.classList.add("wcDesc");
             card.appendChild(desc);
-
+            desc.textContent = formatStr(day.icon)
             console.log(formatStr(day.icon));
+            
 
-            card.addEventListener("click", (e) => {
+            card.addEventListener("click", () => {
                 infoIcon.innerHTML = ""
                 dayWrapper.innerHTML = "";
                 dayDesc.textContent = day.desc;
-                date.textContent = day.date
                 generateDayCard(day);
                 movePointer(index)
-            })
-            
-
-            
-        })
-
-        
+            });   
+        });
 
         const movePointer = (index) => {
             let cardWidth = window.getComputedStyle(card).width;
@@ -133,21 +161,16 @@ function populateInput(data) {
     }
 
     //icons touch ups
-    
+    let locIcon = document.querySelector(".ic");
+    let locInfo = document.querySelector(".locInfo");
     //populate
     if (!isError){
         //generate base info
-        let locInfo = document.createElement("div");
-        let locIcon = document.createElement("div")
-
-        location.appendChild(locIcon)
-        location.appendChild(locInfo);
-
-        locIcon.classList.add("locIcon");
+        curDay.style.visibility = "visible"
         locInfo.textContent = week.address;
-        
-        date.textContent = day.date
+        locIcon.classList.add("locIcon");
         //generate cards
+        
         infoIcon.innerHTML = ""
         dayWrapper.innerHTML = "";
         dayDesc.textContent = day.desc;

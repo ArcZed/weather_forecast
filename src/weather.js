@@ -36,9 +36,6 @@ export async function getInput (location) {
             
         })
         let dayData = daysData[0]
-        console.log(dayData)
-
-        // console.log(dayData.img = dayData.icon)
 
         return {weatherData, daysData, dayData}
 }
