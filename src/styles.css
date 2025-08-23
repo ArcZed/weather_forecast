@@ -47,7 +47,7 @@ body {
 input{
     all: unset;
     border: solid 2px white ;
-    font-size:1.5rem;
+    font-size: 1.3rem;
     padding-left: 10px;
 }
 
@@ -76,7 +76,7 @@ input{
     font-weight: bold;
     width: 100%;
     text-align: center;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
 }
 .line{
     border: 1px solid white;
@@ -94,7 +94,7 @@ input{
 
 .baseInfo {
     width: 95%;
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     height: 100%;
     display: flex;
     align-items: center;
@@ -135,13 +135,13 @@ input{
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     gap: 1vh;
 }
 
 .sun {
     margin-top: 1vh;
-    font-size: 1.2rem;
+    font-size: 1rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
@@ -156,7 +156,7 @@ input{
 
 .temp div {
     color: #E3D8D4;
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 300;
 }
 
@@ -168,7 +168,7 @@ input{
 .xtrInfo {
     display: grid;
     grid-template-rows: 1fr 5fr;
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     place-items: center;
     width: 90%;
    
@@ -188,8 +188,9 @@ input{
 }
 
 .card{
+    padding-top: 2vh;
     display: grid;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 1fr 5fr;
     place-items: center;
     height: 20vh;
     width: 100%;
@@ -212,7 +213,7 @@ input{
 }
 .wDesc {
     align-self: flex-start;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     color: #E3D8D4;
 }
 
@@ -273,12 +274,12 @@ input{
 }
 
 .card:hover {
-    box-shadow: 0 0 10px 0 #7DA0BD inset;
+    box-shadow: 0 0 20px 0 #7DA0BD inset;
 }
 
 .weekCard:hover {
     cursor: pointer;
-    box-shadow: 0 0 10px 0 #7DA0BD inset;
+    box-shadow: 0 0 20px 0 #7DA0BD inset;
     transition:  box-shadow 0.2s ease;
 }
 
