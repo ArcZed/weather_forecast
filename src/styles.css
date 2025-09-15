@@ -15,7 +15,7 @@ html, body {
 body {
     font-family: Helvetica,sans-serif;
     color: #282C26;
-    background-image: url(./background/noon.jpg);
+    background-color: #2895D4;
     display: grid;
     grid-template-rows: 1fr 4fr 3fr;
     align-items: center;
@@ -23,8 +23,22 @@ body {
     background-repeat: no-repeat;
     background-position: top;
     background-size: cover;
+    transition: 0.5s ease;
 }
 
+.sunny {
+    background-image: url(./background/noon.jpg);
+}
+
+.rain {
+    background-image: url(./background/raining.jpg);
+}
+.snow {
+    background-image: url(./background/snow.jpg);
+}
+.cloudy {
+    background-image: url(./background/cloudy.jpg);
+}
 .header {
     height: 100%;
     display: grid;
@@ -49,6 +63,7 @@ input{
     border: solid 2px white ;
     font-size: 1.3rem;
     padding-left: 10px;
+    border-radius: 10px 0 0 10px;
 }
 
 .submit {
@@ -58,6 +73,7 @@ input{
     background-color: #282C26;
     width: 6vh;
     height: 6vh;
+    border-radius: 0 10px 10px 0;
 }
 
 .submit::before {
@@ -286,7 +302,7 @@ input{
 a {
     all: unset;
     margin-left: 5px;
-    color: #E3D8D4;
+    color: #aed1ee;
 }
 a:hover {
     cursor: pointer;

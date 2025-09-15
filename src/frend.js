@@ -22,6 +22,8 @@ function populateInput(data) {
     let day = data.dayData;
     let days = data.daysData
 
+    let body = document.querySelector('body');
+
     let date = document.querySelector(".date");
     let location = document.querySelector(".location_info");
     let infoIcon = document.querySelector(".info_i");
@@ -43,6 +45,20 @@ function populateInput(data) {
         let sun = document.createElement("div");
         let temp = document.querySelector(".temp");
         let feelLike = document.createElement("div");
+
+        if (dayData.icon.includes('rain') || day.icon.includes('showers')) {
+            body.classList.add("rain");
+        }
+        else if (dayData.icon.includes('snow')){
+            body.classList.add("snow");
+        }
+        else if (dayData.icon.includes('cloudy')){
+            body.classList.add("cloudy");
+        }
+        else if (dayData.icon.includes("day")){
+            body.classList.add("sunny");
+        }
+
 
         infoIcon.appendChild(icon);
         dayData.img.then((src)=> {
@@ -139,10 +155,9 @@ function populateInput(data) {
             desc.classList.add("wcDesc");
             card.appendChild(desc);
             desc.textContent = formatStr(day.icon)
-            console.log(formatStr(day.icon));
             
-
             card.addEventListener("click", () => {
+                body.className = "";
                 infoIcon.innerHTML = ""
                 dayWrapper.innerHTML = "";
                 dayDesc.textContent = day.desc;
@@ -170,7 +185,7 @@ function populateInput(data) {
         locInfo.textContent = week.address;
         locIcon.classList.add("locIcon");
         //generate cards
-        
+        body.className = "";
         infoIcon.innerHTML = ""
         dayWrapper.innerHTML = "";
         dayDesc.textContent = day.desc;
@@ -181,10 +196,6 @@ function populateInput(data) {
         wDesc.textContent = week.weekDesc;
         generateWeekNav();
     }
-    
-
-    
-
 }
 
 export function handleInput () {
@@ -196,6 +207,8 @@ export function handleInput () {
     let data
 
     let defaultIndex = 0;
+
+    let defaultLocation = "Ho Chi Minh City"
 
     //create clock (ai code cause im lazy)
     function getTimezoneWithAbbreviation(date) {
@@ -230,6 +243,17 @@ export function handleInput () {
         document.querySelector(".timezone").textContent = getTimezoneWithAbbreviation(now);
     }
     setInterval(updateTime, 1000); // Calls updateClock every second
+    //default location
+    window.addEventListener('load',async (e) => {
+        isError = false;
+            data = await getInput(defaultLocation,defaultIndex);
+            
+            if (data.weatherData === undefined){//fix error condition
+                alert("Please enter another location")
+                isError = true;
+            }
+            populateInput(data);
+    })
 
     //handle input
     input.addEventListener("keyup", () => {
